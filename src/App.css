@@ -53,3 +53,68 @@ input[type="text"], select {
   border-radius: 8px;
 }
 
+.slider {
+  width: 100%;
+  cursor: pointer;
+}
+
+.hours-badge {
+  background: #00b4d8;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+}
+
+
+.extras-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  background: #f0f2f5;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: black;
+}
+
+
+.price-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: #e7f3ff;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: black;
+}
+
+
+.submit-btn {
+  background: #ffd166;
+  color: #333;
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.submit-btn:hover {
+  background: #ffc107;
+}
+
+.submit-btn:disabled {
+  background: #ccc;
+}
