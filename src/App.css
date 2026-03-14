@@ -35,4 +35,21 @@ body {
   gap: 15px;
 }
 
+.input-group {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.input-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #00509d;
+}
+
+input[type="text"], select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
 
