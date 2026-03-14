@@ -10,4 +10,29 @@ body {
   min-height: 100vh;
 }
 
+.calc-card {
+  background: white;
+  width: 90%;
+  max-width: 450px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+
+.calc-header {
+  background: #00509d;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+
+.calc-form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
 
