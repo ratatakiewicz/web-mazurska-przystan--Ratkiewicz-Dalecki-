@@ -91,7 +91,7 @@ const Calculator = () => {
                     /> Akceptuję regulamin wypożyczalni
                 </label>
 
-                <button type="submit" className="submit-btn" disabled={!regulamin || !imie} >
+                <button type="button" className="submit-btn" disabled={!regulamin || !imie} onClick={()=>alert(`Dziękujemy, ${imie}! ${jednostka} jest przygotowywany/a.`)}>
                     Rezerwuję
                 </button>
             </form>
