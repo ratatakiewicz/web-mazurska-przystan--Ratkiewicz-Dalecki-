@@ -5,14 +5,23 @@ import {useState} from "react";
 type Jednostka = "kajak" | "rower" | "omega";
 type Platnosc = "karta" | "blik";
 
+const CENY = {kajak: 20, rower: 35, omega: 150};
+
 const Calculator = () => {
     const [sternik, setSternik] = useState<string>("");
-    const [jednostka, setJednostka] = useState<"kajak" | "rower" | "omega">("kajak");
+    const [lodz, setLodz] = useState<"kajak" | "rower" | "omega">("kajak");
     const [czas, setCzas] = useState<number>(5);
     const [kapok, setKapok] = useState<boolean>(false);
     const [instruktor, setInstruktor] = useState<boolean>(false);
     const [platnosc, setPlatnosc] = useState<"blik" | "karta">("karta");
     const [regulamin, setRegulamin] = useState<boolean>(false);
+
+    const obliczCene = (): number => {
+        let suma = CENY[lodz] * czas;
+        if (kapok) suma += 5;
+        if (instruktor) suma += 50 * czas;
+        return suma;
+    };
 
     return (
         <div className="app-container">
@@ -32,7 +41,7 @@ const Calculator = () => {
 
                 <div className="input-group">
                     <label>Wybierz jednostkę:</label>
-                    <select className="select-style" value={jednostka} onChange={(e)=>setJednostka(e.target.value as Jednostka)}>
+                    <select className="select-style" value={lodz} onChange={(e)=>setLodz(e.target.value as Jednostka)}>
                         <option value="kajak">Kajak (20zł/h)</option>
                         <option value="rower">Rower wodny (35zł/h)</option>
                         <option value="omega">Omega (150zł/h) - WYMAGA PATENTU!</option>
@@ -57,7 +66,7 @@ const Calculator = () => {
 
                 <div className="price-summary">
                     <span>Do zapłaty:</span>
-                    <span className="total-amount">0.00 zł</span>
+                    <span className="total-amount">{obliczCene()}</span>
 
                 </div>
                 <div className="extras-container">
