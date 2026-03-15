@@ -1,7 +1,19 @@
 
 import './App.css';
+import {useState} from "react";
+
+type Jednostka = "kajak" | "rower" | "omega";
+type Platnosc = "karta" | "blik";
 
 const Calculator = () => {
+    const [sternik, setSternik] = useState<string>("");
+    const [jednostka, setJednostka] = useState<"kajak" | "rower" | "omega">("kajak");
+    const [czas, setCzas] = useState<number>(5);
+    const [kapok, setKapok] = useState<boolean>(false);
+    const [instruktor, setInstruktor] = useState<boolean>(false);
+    const [platnosc, setPlatnosc] = useState<"blik" | "karta">("karta");
+    const [regulamin, setRegulamin] = useState<boolean>(false);
+
     return (
         <div className="app-container">
             <div className="calc-card">
@@ -14,13 +26,13 @@ const Calculator = () => {
 
                 <div className="input-group">
                     <label>Imię sternika:</label>
-                    <input type="text" placeholder="Wpisz swoje imię..." />
+                    <input type="text" placeholder="Wpisz swoje imię..." value={sternik} onChange={e => setSternik(e.target.value)}/>
                 </div>
 
 
                 <div className="input-group">
                     <label>Wybierz jednostkę:</label>
-                    <select className="select-style">
+                    <select className="select-style" value={jednostka} onChange={(e)=>setJednostka(e.target.value as Jednostka)}>
                         <option value="kajak">Kajak (20zł/h)</option>
                         <option value="rower">Rower wodny (35zł/h)</option>
                         <option value="omega">Omega (150zł/h) - WYMAGA PATENTU!</option>
@@ -29,27 +41,43 @@ const Calculator = () => {
 
 
                 <div className="input-group">
-                    <label>Czas wynajmu: <span className="hours-badge">4h</span></label>
-                    <input type="range" min="1" max="8" step="1" className="slider" />
+                    <label>Czas wynajmu: <span className="hours-badge">{czas}h</span></label>
+                    <input type="range" min="1" max="8" step="1" className="slider" value={czas} onChange={e => setCzas(Number(e.target.value))} />
                 </div>
 
 
                 <div className="extras-container">
                     <label className="checkbox-item">
-                        <input type="checkbox" /> Kapok dla dziecka (+5zł)
+                        <input type="checkbox" checked={kapok} onChange={(e)=>setKapok(e.target.checked)}/> Kapok dla dziecka (+5zł)
                     </label>
                     <label className="checkbox-item">
-                        <input type="checkbox" /> Opieka instruktora (+50zł/h)
+                        <input type="checkbox" checked={instruktor} onChange={(e)=>setInstruktor(e.target.checked)}/> Opieka instruktora (+50zł/h)
                     </label>
                 </div>
-
 
                 <div className="price-summary">
                     <span>Do zapłaty:</span>
                     <span className="total-amount">0.00 zł</span>
+
+                </div>
+                <div className="extras-container">
+                    <label className="radio-item">
+                        <input type="radio" name="platnosc" value="karta" checked={platnosc === "karta"} onChange={(e) => setPlatnosc(e.target.value as Platnosc)} className="radio-input"
+                        /> Karta płatnicza
+                    </label>
+                    <label className="radio-item">
+                        <input type="radio" name="platnosc" value="blik" checked={platnosc === "blik"} onChange={(e) => setPlatnosc(e.target.value as Platnosc)} className="radio-input"
+                        /> BLIK
+                    </label>
                 </div>
 
-                <button type="submit" className="submit-btn" disabled>
+                <label className="checkbox-item">
+                    <input
+                        type="checkbox" checked={regulamin} onChange={(e) => setRegulamin(e.target.checked)} className="checkbox-input"
+                    /> Akceptuję regulamin wypożyczalni
+                </label>
+
+                <button type="submit" className="submit-btn" >
                     Zarezerwuj i zapłać
                 </button>
             </form>
