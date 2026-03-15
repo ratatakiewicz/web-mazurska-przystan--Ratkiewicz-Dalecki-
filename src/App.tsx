@@ -8,7 +8,7 @@ type Platnosc = "karta" | "blik";
 const CENY = {kajak: 20, rower: 35, omega: 150};
 
 const Calculator = () => {
-    const [sternik, setSternik] = useState<string>("");
+    const [imie, setImie] = useState<string>("");
     const [jednostka, setJednostka] = useState<"kajak" | "rower" | "omega">("kajak");
     const [czas, setCzas] = useState<number>(5);
     const [kapok, setKapok] = useState<boolean>(false);
@@ -35,7 +35,7 @@ const Calculator = () => {
 
                 <div className="input-group">
                     <label>Imię sternika:</label>
-                    <input type="text" placeholder="Wpisz swoje imię..." value={sternik} onChange={e => setSternik(e.target.value)}/>
+                    <input type="text" placeholder="Wpisz swoje imię..." value={imie} onChange={e => setImie(e.target.value)}/>
                 </div>
 
 
@@ -91,8 +91,8 @@ const Calculator = () => {
                     /> Akceptuję regulamin wypożyczalni
                 </label>
 
-                <button type="submit" className="submit-btn" >
-                    Zarezerwuj i zapłać
+                <button type="submit" className="submit-btn" disabled={!regulamin || !imie} >
+                    Rezerwuję
                 </button>
             </form>
         </div>
