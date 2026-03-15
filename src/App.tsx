@@ -2,17 +2,26 @@
 import './App.css';
 import {useState} from "react";
 
-type Jednostka = "kajak" | "rower" | "omega";
+type Jednostka = "Kajak" | "Rower" | "Omega";
 type Platnosc = "karta" | "blik";
 
+const CENY = {Kajak: 20, Rower: 35, Omega: 150};
+
 const Calculator = () => {
-    const [sternik, setSternik] = useState<string>("");
-    const [jednostka, setJednostka] = useState<"kajak" | "rower" | "omega">("kajak");
+    const [imie, setImie] = useState<string>("");
+    const [jednostka, setJednostka] = useState<Jednostka>("Kajak");
     const [czas, setCzas] = useState<number>(5);
     const [kapok, setKapok] = useState<boolean>(false);
     const [instruktor, setInstruktor] = useState<boolean>(false);
-    const [platnosc, setPlatnosc] = useState<"blik" | "karta">("karta");
+    const [platnosc, setPlatnosc] = useState<Platnosc>("karta");
     const [regulamin, setRegulamin] = useState<boolean>(false);
+
+    const obliczCene = (): number => {
+        let suma = CENY[jednostka] * czas;
+        if (kapok) suma += 5;
+        if (instruktor) suma += 50 * czas;
+        return suma;
+    };
 
     return (
         <div className="app-container">
@@ -26,16 +35,21 @@ const Calculator = () => {
 
                 <div className="input-group">
                     <label>Imię sternika:</label>
-                    <input type="text" placeholder="Wpisz swoje imię..." value={sternik} onChange={e => setSternik(e.target.value)}/>
+                    <input type="text" placeholder="Wpisz swoje imię..." value={imie} onChange={e => setImie(e.target.value)}/>
                 </div>
 
 
                 <div className="input-group">
                     <label>Wybierz jednostkę:</label>
-                    <select className="select-style" value={jednostka} onChange={(e)=>setJednostka(e.target.value as Jednostka)}>
-                        <option value="kajak">Kajak (20zł/h)</option>
-                        <option value="rower">Rower wodny (35zł/h)</option>
-                        <option value="omega">Omega (150zł/h) - WYMAGA PATENTU!</option>
+                    <select className="select-style" value={jednostka} onChange={(e)=>{
+                    if(e.target.value==="omega") {
+                        alert("Uwaga! - Wymagany patent żeglarski!");
+                    }
+                    setJednostka(e.target.value as Jednostka);
+                    }} >
+                        <option value="Kajak">Kajak (20zł/h)</option>
+                        <option value="Rower">Rower wodny (35zł/h)</option>
+                        <option value="Omega">Omega (150zł/h) - WYMAGA PATENTU!</option>
                     </select>
                 </div>
 
@@ -57,7 +71,7 @@ const Calculator = () => {
 
                 <div className="price-summary">
                     <span>Do zapłaty:</span>
-                    <span className="total-amount">0.00 zł</span>
+                    <span className="total-amount">{obliczCene().toFixed(2) } zł</span>
 
                 </div>
                 <div className="extras-container">
@@ -73,12 +87,11 @@ const Calculator = () => {
 
                 <label className="checkbox-item">
                     <input
-                        type="checkbox" checked={regulamin} onChange={(e) => setRegulamin(e.target.checked)} className="checkbox-input"
-                    /> Akceptuję regulamin wypożyczalni
+                        type="checkbox" checked={regulamin} onChange={(e) => setRegulamin(e.target.checked)}/> Akceptuję regulamin wypożyczalni
                 </label>
 
-                <button type="submit" className="submit-btn" >
-                    Zarezerwuj i zapłać
+                <button type="button" className="submit-btn" disabled={!regulamin || imie.trim()===""} onClick={()=>alert(`Dziękujemy, ${imie}! ${jednostka} jest przygotowywany/a.`)}>
+                    Rezerwuję
                 </button>
             </form>
         </div>

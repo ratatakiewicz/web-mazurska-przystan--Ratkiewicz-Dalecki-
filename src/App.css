@@ -86,10 +86,6 @@ input[type="text"], select {
   color: black;
 }
 
-.checkbox-input{
-  width: fit-content;
-}
-
 .radio-item {
   display: flex;
   align-items: center;
