@@ -2,14 +2,14 @@
 import './App.css';
 import {useState} from "react";
 
-type Jednostka = "kajak" | "rower" | "omega";
+type Jednostka = "Kajak" | "Rower" | "Omega";
 type Platnosc = "karta" | "blik";
 
-const CENY = {kajak: 20, rower: 35, omega: 150};
+const CENY = {Kajak: 20, Rower: 35, Omega: 150};
 
 const Calculator = () => {
     const [imie, setImie] = useState<string>("");
-    const [jednostka, setJednostka] = useState<Jednostka>("kajak");
+    const [jednostka, setJednostka] = useState<Jednostka>("Kajak");
     const [czas, setCzas] = useState<number>(5);
     const [kapok, setKapok] = useState<boolean>(false);
     const [instruktor, setInstruktor] = useState<boolean>(false);
@@ -47,9 +47,9 @@ const Calculator = () => {
                     }
                     setJednostka(e.target.value as Jednostka);
                     }} >
-                        <option value="kajak">Kajak (20zł/h)</option>
-                        <option value="rower">Rower wodny (35zł/h)</option>
-                        <option value="omega">Omega (150zł/h) - WYMAGA PATENTU!</option>
+                        <option value="Kajak">Kajak (20zł/h)</option>
+                        <option value="Rower">Rower wodny (35zł/h)</option>
+                        <option value="Omega">Omega (150zł/h) - WYMAGA PATENTU!</option>
                     </select>
                 </div>
 
