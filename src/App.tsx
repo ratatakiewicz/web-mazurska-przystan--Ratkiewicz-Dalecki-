@@ -9,11 +9,11 @@ const CENY = {kajak: 20, rower: 35, omega: 150};
 
 const Calculator = () => {
     const [imie, setImie] = useState<string>("");
-    const [jednostka, setJednostka] = useState<"kajak" | "rower" | "omega">("kajak");
+    const [jednostka, setJednostka] = useState<Jednostka>("kajak");
     const [czas, setCzas] = useState<number>(5);
     const [kapok, setKapok] = useState<boolean>(false);
     const [instruktor, setInstruktor] = useState<boolean>(false);
-    const [platnosc, setPlatnosc] = useState<"blik" | "karta">("karta");
+    const [platnosc, setPlatnosc] = useState<Platnosc>("karta");
     const [regulamin, setRegulamin] = useState<boolean>(false);
 
     const obliczCene = (): number => {
@@ -71,7 +71,7 @@ const Calculator = () => {
 
                 <div className="price-summary">
                     <span>Do zapłaty:</span>
-                    <span className="total-amount">{obliczCene()}</span>
+                    <span className="total-amount">{obliczCene().toFixed(2) } zł</span>
 
                 </div>
                 <div className="extras-container">
@@ -87,11 +87,10 @@ const Calculator = () => {
 
                 <label className="checkbox-item">
                     <input
-                        type="checkbox" checked={regulamin} onChange={(e) => setRegulamin(e.target.checked)} className="checkbox-input"
-                    /> Akceptuję regulamin wypożyczalni
+                        type="checkbox" checked={regulamin} onChange={(e) => setRegulamin(e.target.checked)}/> Akceptuję regulamin wypożyczalni
                 </label>
 
-                <button type="button" className="submit-btn" disabled={!regulamin || !imie} onClick={()=>alert(`Dziękujemy, ${imie}! ${jednostka} jest przygotowywany/a.`)}>
+                <button type="button" className="submit-btn" disabled={!regulamin || imie.trim()===""} onClick={()=>alert(`Dziękujemy, ${imie}! ${jednostka} jest przygotowywany/a.`)}>
                     Rezerwuję
                 </button>
             </form>
