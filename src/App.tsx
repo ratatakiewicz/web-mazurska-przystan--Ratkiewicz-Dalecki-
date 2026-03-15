@@ -9,7 +9,7 @@ const CENY = {kajak: 20, rower: 35, omega: 150};
 
 const Calculator = () => {
     const [sternik, setSternik] = useState<string>("");
-    const [lodz, setLodz] = useState<"kajak" | "rower" | "omega">("kajak");
+    const [jednostka, setJednostka] = useState<"kajak" | "rower" | "omega">("kajak");
     const [czas, setCzas] = useState<number>(5);
     const [kapok, setKapok] = useState<boolean>(false);
     const [instruktor, setInstruktor] = useState<boolean>(false);
@@ -17,7 +17,7 @@ const Calculator = () => {
     const [regulamin, setRegulamin] = useState<boolean>(false);
 
     const obliczCene = (): number => {
-        let suma = CENY[lodz] * czas;
+        let suma = CENY[jednostka] * czas;
         if (kapok) suma += 5;
         if (instruktor) suma += 50 * czas;
         return suma;
@@ -41,7 +41,12 @@ const Calculator = () => {
 
                 <div className="input-group">
                     <label>Wybierz jednostkę:</label>
-                    <select className="select-style" value={lodz} onChange={(e)=>setLodz(e.target.value as Jednostka)}>
+                    <select className="select-style" value={jednostka} onChange={(e)=>{
+                    if(e.target.value==="omega") {
+                        alert("Uwaga! - Wymagany patent żeglarski!");
+                    }
+                    setJednostka(e.target.value as Jednostka);
+                    }} >
                         <option value="kajak">Kajak (20zł/h)</option>
                         <option value="rower">Rower wodny (35zł/h)</option>
                         <option value="omega">Omega (150zł/h) - WYMAGA PATENTU!</option>
