@@ -42,7 +42,7 @@ const Calculator = () => {
                 <div className="input-group">
                     <label>Wybierz jednostkę:</label>
                     <select className="select-style" value={jednostka} onChange={(e)=>{
-                    if(e.target.value==="omega") {
+                    if(e.target.value==="Omega") {
                         alert("Uwaga! - Wymagany patent żeglarski!");
                     }
                     setJednostka(e.target.value as Jednostka);
